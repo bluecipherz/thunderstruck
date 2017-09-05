@@ -5,6 +5,24 @@
   width: 25px;
   height: 50px;
   position: absolute;
+  .carOutline{
+    @extend box;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: rgba(0,255,0,0.2);
+  }
+  .carBody{
+    @extend box;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,0,0,0.2);
+  }
   .carHealth{
     @extend box;
     position: absolute;
@@ -71,4 +89,12 @@
   height: 10px;
   background: red;
   position: absolute;
+}
+
+.point{
+  @extend box;
+  position: fixed;
+  background: red;
+  width: 5px;
+  height: 5px;
 }

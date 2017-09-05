@@ -18,6 +18,7 @@ const Missile = function (carState, playgroundID, getCars, carId) {
 
 
     const createMissileDOM = () => {
+        state.pos = getCars()[carId].getBounds()[0];
         m.dom = $('<div class="Missile">');
         $(playgroundID).append(m.dom);
     };
@@ -30,6 +31,34 @@ const Missile = function (carState, playgroundID, getCars, carId) {
         return m.x > t.l && m.y > t.t && m.x < t.r && m.y < t.b
     };
 
+    let coords;
+    const insidePoly = (point, poly) => {
+        coords = [];
+        for(let idx in poly){
+            coords.push([poly[idx].x, poly[idx].y]);
+        }
+
+        return isInside([point.x, point.y], coords);
+    };
+
+    function isInside(point, vs) {
+
+        let x = point[0], y = point[1];
+
+        let inside = false;
+        for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+            let xi = vs[i][0], yi = vs[i][1];
+            let xj = vs[j][0], yj = vs[j][1];
+
+            let intersect = ((yi > y) !== (yj > y))
+                && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+
+        return inside;
+    };
+
+
     const amIHit = () => {
         if(getCars){
             cars = getCars();
@@ -37,7 +66,7 @@ const Missile = function (carState, playgroundID, getCars, carId) {
                 if(cars[idx].id === carId)
                     continue;
 
-                if(inside(state.pos, cars[idx].getPosition())){
+                if(insidePoly(state.pos, cars[idx].getBounds())){
                     cars[idx].hit();
                     return true;
                 }

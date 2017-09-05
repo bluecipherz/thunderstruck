@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3ea3025-55de-4503-931a-3d60921c4f4a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.css" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.css.map" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.css.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.js" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.scss" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Missile.js" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Missile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js" afterPath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,8 +25,8 @@
       <file leaf-file-name="PlayGround.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="122" column="95" lean-forward="false" selection-start-line="122" selection-start-column="95" selection-end-line="122" selection-end-column="95" />
+            <state relative-caret-position="571">
+              <caret line="123" column="16" lean-forward="true" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
               <folding>
                 <element signature="e#50#89#0" expanded="true" />
               </folding>
@@ -37,8 +37,8 @@
       <file leaf-file-name="Car.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="220" column="27" lean-forward="false" selection-start-line="220" selection-start-column="27" selection-end-line="220" selection-end-column="27" />
+            <state relative-caret-position="481">
+              <caret line="36" column="27" lean-forward="false" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
               <folding>
                 <element signature="e#50#89#0" expanded="true" />
               </folding>
@@ -49,8 +49,8 @@
       <file leaf-file-name="Missile.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Missile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+            <state relative-caret-position="390">
+              <caret line="52" column="41" lean-forward="false" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
               <folding>
                 <element signature="e#50#73#0" expanded="true" />
               </folding>
@@ -61,8 +61,8 @@
       <file leaf-file-name="Car.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+            <state relative-caret-position="697">
+              <caret line="98" column="11" lean-forward="true" selection-start-line="98" selection-start-column="11" selection-end-line="98" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -118,9 +118,11 @@
       <find>playerSync</find>
       <find>cars</find>
       <find>player</find>
+      <find>var</find>
     </findStrings>
     <replaceStrings>
       <replace>car</replace>
+      <replace>let</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -137,9 +139,9 @@
         <option value="$PROJECT_DIR$/src/Triggers/KeyboardTrigger.js" />
         <option value="$PROJECT_DIR$/src/Constants/Constants.js" />
         <option value="$PROJECT_DIR$/src/index.css" />
+        <option value="$PROJECT_DIR$/src/GameScreen/Car/Car.scss" />
         <option value="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js" />
         <option value="$PROJECT_DIR$/src/GameScreen/Car/Missile.js" />
-        <option value="$PROJECT_DIR$/src/GameScreen/Car/Car.scss" />
         <option value="$PROJECT_DIR$/src/GameScreen/Car/Car.js" />
       </list>
     </option>
@@ -399,12 +401,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1504551715083</updated>
-      <workItem from="1504551716672" duration="19217000" />
+      <workItem from="1504551716672" duration="26094000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19217000" />
+    <option name="totallyTimeSpent" value="26094000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="42" y="-11" width="1559" height="912" extended-state="6" />
@@ -554,36 +556,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="122" column="95" lean-forward="false" selection-start-line="122" selection-start-column="95" selection-end-line="122" selection-end-column="95" />
+        <state relative-caret-position="571">
+          <caret line="123" column="16" lean-forward="true" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
           <folding>
             <element signature="e#50#89#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="98" column="11" lean-forward="true" selection-start-line="98" selection-start-column="11" selection-end-line="98" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Missile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+        <state relative-caret-position="390">
+          <caret line="52" column="41" lean-forward="false" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
           <folding>
             <element signature="e#50#73#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="220" column="27" lean-forward="false" selection-start-line="220" selection-start-column="27" selection-end-line="220" selection-end-column="27" />
+        <state relative-caret-position="481">
+          <caret line="36" column="27" lean-forward="false" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
           <folding>
             <element signature="e#50#89#0" expanded="true" />
           </folding>
