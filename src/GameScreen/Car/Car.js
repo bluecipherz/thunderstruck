@@ -15,6 +15,7 @@ class Car extends Component{
         super(props);
         const {sync} = props;
         this.id = Math.random() + "_car";
+        let cars;
         let left = false;
         let right = false;
         let up = false;
@@ -43,9 +44,10 @@ class Car extends Component{
         let steering = 5;
         let maxSteerRot = 38;
         let automaticSteerReset = true;
-        let acceleration = 0.5;
-        let maxSpeed = 10;
+        let acceleration = 0.9;
+        let maxSpeed = 15;
         let deceleration = 0.1;
+        let targetVision = 40;
 
         const Left = (state) => {
             left = state;
@@ -86,7 +88,7 @@ class Car extends Component{
         const fireMissile = () => {
             if(!missileTimer){
                 missileTimer = true;
-                let m = new Missile(state, playgroundID, props.getCars, this.id);
+                let m = new Missile(state, playgroundID, props.getCars, this.id, this.target);
                 missiles[m.id] = m;
                 setTimeout(()=>{
                     missileTimer = false;
@@ -123,6 +125,8 @@ class Car extends Component{
 
             const run = () => {
 
+                checkTarget();
+
                 if(left){
                     if(state.w1.r > -maxSteerRot){
                         state.w1.r -= steering;
@@ -152,7 +156,7 @@ class Car extends Component{
 
                 if(up){
                     if(speed < maxSpeed){
-                        speed += acceleration
+                        speed += Math.max(acceleration - Math.min(acceleration, ((speed+1)/maxSpeed)), 0.05);
                     }
                 }else if(down){
                     if(speed > -(maxSpeed/2)){
@@ -193,6 +197,46 @@ class Car extends Component{
 
                 }
                 updateMissiles();
+            }
+        };
+
+        const checkTarget = () => {
+
+            /*
+            *
+            * */
+
+            cars = props.getCars();
+            let gotTarget = false;
+
+            for(let idx in cars){
+                if(cars[idx].id === this.id)
+                    continue;
+
+                let c = this.getCenter();
+
+                if(Math.abs(cars[idx].getAngleDiff(c.x, c.y, state.angle)) < targetVision){
+                    this.target = cars[idx];
+                    gotTarget = true;
+                    break;
+                }
+            }
+
+            if(!gotTarget){
+                this.target = null;
+            }
+
+            if(this.target){
+                let c = this.target.getCenter();
+                $(this.refs.targetLocker).css({
+                    left:c.x -25,
+                    top:c.y -25,
+                })
+            }else{
+                $(this.refs.targetLocker).css({
+                    left: -99999,
+                    top: -99999,
+                })
             }
         };
 
@@ -252,6 +296,27 @@ class Car extends Component{
             };
         };
 
+
+        function get_polygon_centroid(pts) {
+            let first = pts[0], last = pts[pts.length-1];
+            if (first.x != last.x || first.y != last.y) pts.push(first);
+            let twicearea=0,
+                x=0, y=0,
+                nPts = pts.length,
+                p1, p2, f;
+            for ( let i=0, j=nPts-1 ; i<nPts ; j=i++ ) {
+                p1 = pts[i]; p2 = pts[j];
+                f = p1.x*p2.y - p2.x*p1.y;
+                twicearea += f;
+                x += ( p1.x + p2.x ) * f;
+                y += ( p1.y + p2.y ) * f;
+            }
+            f = twicearea * 3;
+            return { x:x/f, y:y/f };
+        }
+
+
+
         init();
 
         this.getPosition = () => {
@@ -273,8 +338,40 @@ class Car extends Component{
             return coords;
         };
 
+        function getAngle(cx, cy, ex, ey) {
+            let dy = ey - cy;
+            let dx = ex - cx;
+            let theta = Math.atan2(dy, dx); // range (-PI, PI]
+            theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+            if (theta < 0) theta = 360 + theta; // range [0, 360)
+            return theta;
+        }
+
+        this.getAngle = (x,y) => {
+            let c = this.getCenter();
+            return getAngle(c.x, c.y, x, y);
+        };
+
+        this.getAngleDiff = (x,y,angle) => {
+            let a = this.getAngle(x, y);
+            let ag;
+            if(a - (angle % 360) % 360 > 180 || a - (angle % 360) % 360 < -180){
+                ag = a - 360 - (angle % 360) - 90;
+            }else{
+                ag = a - (angle % 360) - 90;
+            }
+            return ag;
+        };
+
         this.hit = () => {
-          state.health -= 30;
+          state.health -= 5;
+          maxSpeed *= state.health / 100
+        };
+
+        this.getSpeed = () => {return speed}
+
+        this.getCenter = () => {
+            return get_polygon_centroid(this.getBounds());
         }
 
     }
@@ -296,6 +393,7 @@ class Car extends Component{
                 <div className="carHealth" ref="health_bar">
                     <div className="ch-bar" ref="health"></div>
                 </div>
+                <div className="targetLocker" ref="targetLocker"></div>
                 <div className="Car">
                     <div className="wheel wheel1" ref="w1"></div>
                     <div className="wheel wheel2" ref="w2"></div>

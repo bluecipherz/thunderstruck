@@ -38,6 +38,7 @@ class PlayGround extends Component{
         };
 
         const initBots = () => {
+            // let keys = [37,38,39,40];
             let keys = [37,38,39,40,87];
             setInterval(()=>{
                 for(let idx in bots){
@@ -119,7 +120,7 @@ class PlayGround extends Component{
     render(){
         return(
             <div className="PlayGround" id="playground">
-                <Car sync={this.playerSync} getCars={this.getCars} reg={this.regCar}/>
+                <Car sync={this.playerSync} getCars={this.getCars} reg={this.regCar} player={true}/>
                 <Car sync={this.botSync} getCars={this.getCars}  reg={this.regCar} x={500} y={200} angle={180}/>
             </div>
         )

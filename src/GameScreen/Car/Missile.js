@@ -4,17 +4,18 @@
 import $ from 'jquery';
 import _ from 'lodash';
 
-const Missile = function (carState, playgroundID, getCars, carId) {
+const Missile = function (carState, playgroundID, getCars, carId, target) {
     let m = this;
     m.id = Math.random()+"_m";
 
-    let speed = 0;
-    let acceleration = 1;
+    let speed = getCars()[carId].getSpeed() / 2;
+    let acceleration = 1.1;
     let maxSpeed = 30;
     let screenW = $(window).width()
     let screenH = $(window).height()
     let state = _.cloneDeep(carState);
     let cars = null;
+    let missileAcc = 2;
 
 
     const createMissileDOM = () => {
@@ -82,6 +83,16 @@ const Missile = function (carState, playgroundID, getCars, carId) {
 
         if(speed < maxSpeed){
             speed+=acceleration;
+        }
+
+        if(target){
+            let ag = target.getAngleDiff(state.pos.x, state.pos.y, state.angle);
+
+            if(ag > 1){
+                state.angle += missileAcc
+            }else if(ag < -1){
+                state.angle -= missileAcc
+            }
         }
 
         state.pos.y -= speed * Math.cos(state.angle * (Math.PI / 180));
