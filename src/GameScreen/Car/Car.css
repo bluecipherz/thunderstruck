@@ -55,7 +55,7 @@ fullBox {
   width: 100%;
   height: 100%; }
 
-box, waveEffect, inButton, .in-spinner, .Car:after, .Car, .Car .wheel, .Missile {
+box, waveEffect, inButton, .in-spinner, .CarOuter, .CarOuter .carHealth, .CarOuter .carHealth .ch-bar, .CarOuter .Car:after, .CarOuter .Car, .CarOuter .Car .wheel, .Missile {
   position: relative;
   display: block;
   float: left;
@@ -388,41 +388,55 @@ whiteGrad2 {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FCFCFC', endColorstr='#F7F7F7',GradientType=0 );
   /* ie6-9 */ }
 
-.Car:after {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: 5px;
-  right: 5px;
-  height: 5px;
-  background: rgba(0, 0, 0, 0.2); }
-
-.Car {
+.CarOuter {
   width: 25px;
   height: 50px;
-  background: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 100px;
-  left: 100px;
-  transform-origin: bottom;
-  z-index: 100; }
-  .Car .wheel {
-    width: 4px;
-    height: 12px;
+  position: absolute; }
+  .CarOuter .carHealth {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.1); }
+    .CarOuter .carHealth .ch-bar {
+      height: 100%;
+      width: 0;
+      background: #73d94a; }
+  .CarOuter .Car:after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    right: 5px;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.2); }
+  .CarOuter .Car {
+    width: 25px;
+    height: 50px;
     background: rgba(0, 0, 0, 0.2);
-    position: absolute; }
-  .Car .wheel1 {
-    top: 5px;
-    left: -2px; }
-  .Car .wheel2 {
-    top: 5px;
-    right: -2px; }
-  .Car .wheel3 {
-    bottom: 5px;
-    left: -2px; }
-  .Car .wheel4 {
-    bottom: 5px;
-    right: -2px; }
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform-origin: bottom;
+    z-index: 100; }
+    .CarOuter .Car .wheel {
+      width: 4px;
+      height: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      position: absolute; }
+    .CarOuter .Car .wheel1 {
+      top: 5px;
+      left: -2px; }
+    .CarOuter .Car .wheel2 {
+      top: 5px;
+      right: -2px; }
+    .CarOuter .Car .wheel3 {
+      bottom: 5px;
+      left: -2px; }
+    .CarOuter .Car .wheel4 {
+      bottom: 5px;
+      right: -2px; }
 
 .Missile {
   width: 2px;

@@ -25,7 +25,8 @@ class Car extends Component{
             w1:{r:0},
             w2:{r:0},
             pos:{x:props.x || 500,y: props.y || 500},
-            angle:30
+            angle:props.angle || 1,
+            health:100,
         };
         let missiles = {};
         let playgroundID = '#playground';
@@ -84,11 +85,11 @@ class Car extends Component{
         const fireMissile = () => {
             if(!missileTimer){
                 missileTimer = true;
-                let m = new Missile(state, playgroundID, props.getCars);
+                let m = new Missile(state, playgroundID, props.getCars, this.id);
                 missiles[m.id] = m;
                 setTimeout(()=>{
                     missileTimer = false;
-                }, 1000)
+                }, 500)
             }
         };
 
@@ -182,12 +183,12 @@ class Car extends Component{
 
                     $(this.refs.w1).css({transform:'rotate('+state.w1.r+'deg)'});
                     $(this.refs.w2).css({transform:'rotate('+state.w2.r+'deg)'});
-
                     $(this.refs.car).css({
                         left:state.pos.x,
                         top:state.pos.y,
-                        transform:'rotate('+state.angle+'deg)'
                     });
+                    $(this.refs.car).find(".Car").css({transform:'rotate('+state.angle+'deg)'});
+                    $(this.refs.health).css({width:state.health+'%'});
 
                 }
                 updateMissiles();
@@ -200,16 +201,12 @@ class Car extends Component{
 
             if(tempState.w1.r !== state.w1.r || tempState.w2.r !== state.w2.r ||
                 tempState.pos.x !== state.pos.x || tempState.pos.y !== state.pos.y ||
-                tempState.angle !== state.angle)
+                tempState.angle !== state.angle || tempState.health !== state.health)
                 return true;
 
         };
 
         init();
-
-        this.getState = () => {
-            return state;
-        }
 
         this.getPosition = () => {
             return {
@@ -218,6 +215,10 @@ class Car extends Component{
                 r:state.pos.x+carW,
                 b:state.pos.y+carH,
             }
+        };
+
+        this.hit = () => {
+          state.health -= 30;
         }
 
     }
@@ -225,11 +226,16 @@ class Car extends Component{
 
     render(){
         return(
-            <div className="Car" ref="car">
-                <div className="wheel wheel1" ref="w1"></div>
-                <div className="wheel wheel2" ref="w2"></div>
-                <div className="wheel wheel3"></div>
-                <div className="wheel wheel4"></div>
+            <div className="CarOuter" ref="car">
+                <div className="carHealth">
+                    <div className="ch-bar" ref="health"></div>
+                </div>
+                <div className="Car">
+                    <div className="wheel wheel1" ref="w1"></div>
+                    <div className="wheel wheel2" ref="w2"></div>
+                    <div className="wheel wheel3"></div>
+                    <div className="wheel wheel4"></div>
+                </div>
             </div>
         )
     }

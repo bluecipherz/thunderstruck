@@ -1,38 +1,70 @@
 @import "../../SCSSMixins/scss.mixin";
 
-.Car:after{
-  @extend box;
-  content: '';
-  position: absolute;
-  top:-5px;
-  left:5px;
-  right:5px;
-  height: 5px;
-  background: rgba(0,0,0,0.2);
-}
-.Car{
+.CarOuter {
   @extend box;
   width: 25px;
   height: 50px;
-  background: rgba(0,0,0,0.2);
   position: absolute;
-  top:100px;
-  left: 100px;
-  transform-origin: bottom;
-  .wheel{
+  .carHealth{
     @extend box;
-    width: 4px;
-    height: 12px;
-    background: rgba(0,0,0,0.2);
     position: absolute;
+    top:-10px;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background: rgba(0,0,0,0.1);
+    .ch-bar{
+      @extend box;
+      height: 100%;
+      width: 0;
+      background: #73d94a;
+    }
   }
-  .wheel1{top:5px; left:-2px}
-  .wheel2{top:5px; right:-2px}
-  .wheel3{bottom:5px; left:-2px}
-  .wheel4{bottom:5px; right:-2px}
-  z-index: 100;
+  .Car:after{
+    @extend box;
+    content: '';
+    position: absolute;
+    top:-5px;
+    left:5px;
+    right:5px;
+    height: 5px;
+    background: rgba(0,0,0,0.2);
+  }
+  .Car {
+    @extend box;
+    width: 25px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform-origin: bottom;
+    .wheel {
+      @extend box;
+      width: 4px;
+      height: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      position: absolute;
+    }
+    .wheel1 {
+      top: 5px;
+      left: -2px
+    }
+    .wheel2 {
+      top: 5px;
+      right: -2px
+    }
+    .wheel3 {
+      bottom: 5px;
+      left: -2px
+    }
+    .wheel4 {
+      bottom: 5px;
+      right: -2px
+    }
+    z-index: 100;
+  }
 }
-
 .Missile{
   @extend box;
   width: 2px;

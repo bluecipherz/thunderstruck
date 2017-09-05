@@ -4,7 +4,7 @@
 import $ from 'jquery';
 import _ from 'lodash';
 
-const Missile = function (carState, playgroundID, getCars) {
+const Missile = function (carState, playgroundID, getCars, carId) {
     let m = this;
     m.id = Math.random()+"_m";
 
@@ -34,7 +34,11 @@ const Missile = function (carState, playgroundID, getCars) {
         if(getCars){
             cars = getCars();
             for(let idx in cars){
+                if(cars[idx].id === carId)
+                    continue;
+
                 if(inside(state.pos, cars[idx].getPosition())){
+                    cars[idx].hit();
                     return true;
                 }
             }

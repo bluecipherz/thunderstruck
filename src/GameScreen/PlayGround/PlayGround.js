@@ -43,7 +43,7 @@ class PlayGround extends Component{
                 for(let idx in bots){
                     let keyId = parseInt(Math.random() * 5, 10);
                     for(let jdx in keys){
-                        if(parseInt(jdx) === keyId){
+                        if(parseInt(jdx, 10) === keyId){
                             controller(bots[idx], true, keys[jdx]);
                             setTimeout(()=>{
                                 controller(bots[idx], false, keys[jdx]);
@@ -51,7 +51,7 @@ class PlayGround extends Component{
                         }
                     }
                 }
-            },100);
+            },500);
         };
 
         const init = () => {
@@ -119,8 +119,8 @@ class PlayGround extends Component{
     render(){
         return(
             <div className="PlayGround" id="playground">
-                <Car sync={this.playerSync} getCars={this.getCars}/>
-                <Car sync={this.botSync} reg={this.regCar}/>
+                <Car sync={this.playerSync} getCars={this.getCars} reg={this.regCar}/>
+                <Car sync={this.botSync} getCars={this.getCars}  reg={this.regCar} x={500} y={200} angle={180}/>
             </div>
         )
     }
