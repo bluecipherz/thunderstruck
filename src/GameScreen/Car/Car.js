@@ -32,6 +32,7 @@ class Car extends Component{
         let missiles = {};
         let playgroundID = '#playground';
         let missileTimer = false;
+        let crashInertia = {speed:0, angle:0};
 
         let carW = 25;
         let carH = 50;
@@ -182,6 +183,15 @@ class Car extends Component{
                 state.pos.y -= speed * Math.cos(state.angle * (Math.PI / 180));
                 state.pos.x += speed * Math.sin(state.angle * (Math.PI / 180));
 
+                state.pos.y -= crashInertia.speed * Math.cos(crashInertia.angle * (Math.PI / 180));
+                state.pos.x += crashInertia.speed * Math.sin(crashInertia.angle * (Math.PI / 180));
+
+                if(crashInertia.speed > 1){
+                    crashInertia.speed -= 0.5;
+                }else{
+                    crashInertia.speed = 0;
+                }
+
                 if(propsChanged()){
                     tempState = _.cloneDeep(state);
 
@@ -200,6 +210,26 @@ class Car extends Component{
             }
         };
 
+
+        const checkCollision = (car) => {
+            let cds = this.getBounds();
+            for(let idx in cds){
+                if(car.checkIsInside(cds[idx]))
+                    return true
+            }
+            return false;
+        };
+
+
+        const createCrashInertia = (s, angle) => {
+            crashInertia = {
+                speed:s + (s/2),
+                angle:angle
+            }
+        };
+
+
+
         const checkTarget = () => {
 
             /*
@@ -216,9 +246,14 @@ class Car extends Component{
                 let c = this.getCenter();
 
                 if(Math.abs(cars[idx].getAngleDiff(c.x, c.y, state.angle)) < targetVision){
-                    this.target = cars[idx];
-                    gotTarget = true;
-                    break;
+                    if(!gotTarget){
+                        this.target = cars[idx];
+                        gotTarget = true;
+                    }
+                    if(checkCollision(cars[idx])){
+                        cars[idx].collied(speed, state.angle);
+                        this.collied(cars[idx].getSpeed(), cars[idx].getCarAngle());
+                    }
                 }
             }
 
@@ -352,6 +387,8 @@ class Car extends Component{
             return getAngle(c.x, c.y, x, y);
         };
 
+        this.getCarAngle = () => {return state.angle};
+
         this.getAngleDiff = (x,y,angle) => {
             let a = this.getAngle(x, y);
             let ag;
@@ -365,14 +402,52 @@ class Car extends Component{
 
         this.hit = () => {
           state.health -= 5;
-          maxSpeed *= state.health / 100
+          maxSpeed *= state.health / 100;
+          state.angle += -5 + (Math.random() * 10);
+          if(speed > 3)
+              speed -= 1;
         };
 
         this.getSpeed = () => {return speed}
 
         this.getCenter = () => {
             return get_polygon_centroid(this.getBounds());
-        }
+        };
+
+        this.checkIsInside = (point) => {
+            let poly = this.getBounds();
+            let coords = [];
+            for(let idx in poly){
+                coords.push([poly[idx].x, poly[idx].y]);
+            }
+
+            return isInside([point.x, point.y], coords);
+        };
+
+        function isInside(point, vs) {
+
+            let x = point[0], y = point[1];
+
+            let inside = false;
+            for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+                let xi = vs[i][0], yi = vs[i][1];
+                let xj = vs[j][0], yj = vs[j][1];
+
+                let intersect = ((yi > y) !== (yj > y))
+                    && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+
+            return inside;
+        };
+
+
+        this.collied = (s, angle) => {
+            createCrashInertia(s, angle);
+            if(speed > 3)
+              speed -= 3;
+            state.health -= speed / 10;
+        };
 
     }
 

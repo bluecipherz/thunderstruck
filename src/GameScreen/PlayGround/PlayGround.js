@@ -39,8 +39,9 @@ class PlayGround extends Component{
 
         const initBots = () => {
             // let keys = [37,38,39,40];
-            let keys = [37,38,39,40,87];
+            let keys = [38,38,38,38,87];
             setInterval(()=>{
+                let target = cars[Object.keys(cars)[0]];
                 for(let idx in bots){
                     let keyId = parseInt(Math.random() * 5, 10);
                     for(let jdx in keys){
@@ -51,8 +52,23 @@ class PlayGround extends Component{
                             }, 500)
                         }
                     }
+                    if(target && cars[idx]){
+                        let c = cars[idx].getCenter();
+                        let d = target.getAngleDiff(c.x, c.y, cars[idx].getCarAngle());
+                        if(d>10){
+                            controller(bots[idx], true, 39);
+                            setTimeout(()=>{
+                                controller(bots[idx], false, 39);
+                            }, 100)
+                        }else if(d < -10){
+                            controller(bots[idx], true, 37);
+                            setTimeout(()=>{
+                                controller(bots[idx], false, 37);
+                            }, 100)
+                        }
+                    }
                 }
-            },500);
+            },200);
         };
 
         const init = () => {
@@ -73,7 +89,7 @@ class PlayGround extends Component{
             if(action && !this.engine){
                 this.engine = setInterval(()=>{
                     run();
-                }, 1000 / FPS)
+                }, 200 / FPS)
 
             /*Stop*/
             }else if(!action && this.engine){
@@ -122,6 +138,8 @@ class PlayGround extends Component{
             <div className="PlayGround" id="playground">
                 <Car sync={this.playerSync} getCars={this.getCars} reg={this.regCar} player={true}/>
                 <Car sync={this.botSync} getCars={this.getCars}  reg={this.regCar} x={500} y={200} angle={180}/>
+                <Car sync={this.botSync} getCars={this.getCars}  reg={this.regCar} x={300} y={400} angle={180}/>
+                <Car sync={this.botSync} getCars={this.getCars}  reg={this.regCar} x={800} y={300} angle={180}/>
             </div>
         )
     }
