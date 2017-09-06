@@ -55,7 +55,7 @@ fullBox {
   width: 100%;
   height: 100%; }
 
-box, waveEffect, inButton, .in-spinner, .CarOuter, .CarOuter .carOutline, .CarOuter .carBody, .CarOuter .carHealth, .CarOuter .carHealth .ch-bar, .CarOuter .Car:after, .CarOuter .Car, .CarOuter .Car .wheel, .Missile, .point, .targetLocker {
+box, waveEffect, inButton, .in-spinner, .CarOuter, .CarOuter .carOutline, .CarOuter .carBody, .CarOuter .carHealth, .CarOuter .carHealth .ch-bar, .CarOuter .Car:after, .CarOuter .Car, .CarOuter .Car .carPlayer, .CarOuter .Car .wheel, .Missile, .point, .targetLocker {
   position: relative;
   display: block;
   float: left;
@@ -434,6 +434,10 @@ whiteGrad2 {
     left: 0px;
     transform-origin: bottom;
     z-index: 100; }
+    .CarOuter .Car .carPlayer {
+      width: 100%;
+      height: 100%;
+      background: rgba(102, 174, 255, 0.86); }
     .CarOuter .Car .wheel {
       width: 4px;
       height: 12px;

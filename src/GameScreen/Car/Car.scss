@@ -57,6 +57,12 @@
     top: 0px;
     left: 0px;
     transform-origin: bottom;
+    .carPlayer{
+      @extend box;
+      width: 100%;
+      height: 100%;
+      background: rgba(102, 174, 255, 0.86);
+    }
     .wheel {
       @extend box;
       width: 4px;

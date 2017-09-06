@@ -46,7 +46,7 @@ class Car extends Component{
         let maxSteerRot = 38;
         let automaticSteerReset = true;
         let acceleration = 0.9;
-        let maxSpeed = 15;
+        let maxSpeed = 18;
         let deceleration = 0.1;
         let targetVision = 40;
 
@@ -470,6 +470,11 @@ class Car extends Component{
                 </div>
                 <div className="targetLocker" ref="targetLocker"></div>
                 <div className="Car">
+                    {
+                        this.props.player ? (
+                            <div className="carPlayer"></div>
+                        ) : null
+                    }
                     <div className="wheel wheel1" ref="w1"></div>
                     <div className="wheel wheel2" ref="w2"></div>
                     <div className="wheel wheel3"></div>
