@@ -413,6 +413,12 @@ whiteGrad2 {
     width: 30px;
     height: 3px;
     background: rgba(0, 0, 0, 0.1); }
+    .CarOuter .carHealth .ch-name {
+      position: absolute;
+      top: -20px;
+      font-size: 13px;
+      left: 0;
+      line-height: 20px; }
     .CarOuter .carHealth .ch-bar {
       height: 100%;
       width: 0;

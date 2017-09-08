@@ -426,6 +426,11 @@ class Car extends Component{
           state.angle += -5 + (Math.random() * 10);
           if(speed > 3)
               speed -= 1;
+
+          if(state.health <= 0){
+              speed =0;
+              maxSpeed=0;
+          }
         };
 
         this.getSpeed = () => {return speed}
@@ -487,6 +492,7 @@ class Car extends Component{
                     ) : null
                 }
                 <div className="carHealth" ref="health_bar">
+                    <div className="ch-name">{this.name}</div>
                     <div className="ch-bar" ref="health"></div>
                 </div>
                 <div className="targetLocker" ref="targetLocker"></div>
