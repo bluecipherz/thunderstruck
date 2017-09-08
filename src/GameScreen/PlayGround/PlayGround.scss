@@ -3,3 +3,46 @@
 .PlayGround{
   @extend box;
 }
+.GameScreen,
+.AuthScreen{
+  @extend box;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: #fff;
+  input{
+    @include borderBox();
+    width: 200px;
+    height: 40px;
+    border: 1px solid #ddd;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left: -100px;
+    margin-top: -20px;
+    padding-left: 20px;
+  }
+  .as-button:hover{
+    cursor: pointer;
+    background: #f05d5e;
+  }
+  .as-button{
+    @include borderBox();
+    width: 200px;
+    height: 40px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    line-height: 40px;
+    margin-left: -100px;
+    margin-top: 30px;
+    background: #f04a54;
+    color: #fff;
+    text-align: center;
+  }
+}
+.GameScreen{
+
+}

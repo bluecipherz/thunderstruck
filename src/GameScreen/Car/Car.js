@@ -14,7 +14,7 @@ class Car extends Component{
     constructor(props){
         super(props);
         const {sync} = props;
-        this.id = Math.random() + "_car";
+        this.id = props.uid;
         let cars;
         let left = false;
         let right = false;
@@ -70,6 +70,15 @@ class Car extends Component{
             fireMissile();
         };
 
+
+        const getState = (cal) => {
+            cal(state);
+        };
+
+        const setCarState = (s) => {
+            state = s;
+        };
+
         const init = () => {
             if(sync){
                 sync("LEFT", Left, this.id);
@@ -77,6 +86,8 @@ class Car extends Component{
                 sync("UP", Up, this.id);
                 sync("DOWN", Down, this.id);
                 sync("W", keyW, this.id);
+                sync("GET", getState, this.id);
+                sync("SET", setCarState, this.id);
             }
 
             if(props.reg){
@@ -156,7 +167,7 @@ class Car extends Component{
                 }
 
                 if(up){
-                    if(speed < maxSpeed){
+                    if(speed < (maxSpeed * Math.max(state.health / 100, 0.5))){
                         speed += Math.max(acceleration - Math.min(acceleration, ((speed+1)/maxSpeed)), 0.05);
                     }
                 }else if(down){
@@ -402,7 +413,6 @@ class Car extends Component{
 
         this.hit = () => {
           state.health -= 5;
-          maxSpeed *= state.health / 100;
           state.angle += -5 + (Math.random() * 10);
           if(speed > 3)
               speed -= 1;
@@ -448,6 +458,7 @@ class Car extends Component{
               speed -= 3;
             state.health -= speed / 10;
         };
+
 
     }
 

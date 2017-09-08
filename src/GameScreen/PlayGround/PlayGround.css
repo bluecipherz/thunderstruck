@@ -55,7 +55,8 @@ fullBox {
   width: 100%;
   height: 100%; }
 
-box, waveEffect, inButton, .in-spinner, .PlayGround {
+box, waveEffect, inButton, .in-spinner, .PlayGround, .GameScreen,
+.AuthScreen {
   position: relative;
   display: block;
   float: left;
@@ -387,5 +388,48 @@ whiteGrad2 {
   /* w3c */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FCFCFC', endColorstr='#F7F7F7',GradientType=0 );
   /* ie6-9 */ }
+
+.GameScreen,
+.AuthScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff; }
+  .GameScreen input,
+  .AuthScreen input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 200px;
+    height: 40px;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -20px;
+    padding-left: 20px; }
+  .GameScreen .as-button:hover,
+  .AuthScreen .as-button:hover {
+    cursor: pointer;
+    background: #f05d5e; }
+  .GameScreen .as-button,
+  .AuthScreen .as-button {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 200px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    line-height: 40px;
+    margin-left: -100px;
+    margin-top: 30px;
+    background: #f04a54;
+    color: #fff;
+    text-align: center; }
 
 /*# sourceMappingURL=PlayGround.css.map */

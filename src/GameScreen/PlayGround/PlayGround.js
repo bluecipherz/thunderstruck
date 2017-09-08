@@ -3,9 +3,17 @@
  */
 import React, {Component} from 'react';
 import './PlayGround.css';
-import {eventNames, FPS} from '../../Constants/Constants';
+import {eventNames} from '../../Constants/Constants';
 import Car from '../Car/Car';
 import {loadMap} from '../Map/Map';
+import io from 'socket.io-client';
+
+const mqttHost = 'http://13.228.24.181:3400';
+const mqttEvents = {
+    "STATE_UPDATE":0,
+    "KEY_EVENT":0,
+    "COLLISION":0,
+};
 
 class PlayGround extends Component{
 
@@ -14,14 +22,22 @@ class PlayGround extends Component{
         const {handler} = props;
         let cars = {};
         let bots = {};
+        let webPlayers = {};
         let player = {};
 
         const keyDownHandler = (state, event) => {
-            controller(player, true, event.data.keyCode);
+            processKeyEvent(player, true, event.data.keyCode);
         };
 
         const keyUpHandler = (state, event) => {
-            controller(player, false, event.data.keyCode);
+            processKeyEvent(player, false, event.data.keyCode);
+        };
+
+        const processKeyEvent = (car, state, keyCode) => {
+            controller(car, state, keyCode);
+            if(this.state.game){
+                sendEvent(car, state, keyCode)
+            }
         };
 
         const controller = (car, state, keyCode) =>{
@@ -37,6 +53,21 @@ class PlayGround extends Component{
                 car.W(state);
             }
         };
+
+
+        const sendEvent = (car, state, keyCode) => {
+            if(this.socket){
+                car.GET(carState=>{
+                    this.socket.emit("msg",{
+                        u:this.state.auth.username,
+                        s:state,
+                        k:keyCode,
+                        t:1,
+                    })
+                })
+            }
+        };
+
 
         const initBots = () => {
             // let keys = [37,38,39,40];
@@ -72,38 +103,63 @@ class PlayGround extends Component{
             },200);
         };
 
-        const init = () => {
-            handler.subscribe(eventNames.KEYDOWN, keyDownHandler);
-            handler.subscribe(eventNames.KEYUP, keyUpHandler);
-            initBots();
-            // Engine(true);
+
+        const onMqttMsg = (msg) => {
+            if(msg.t===0){
+                webPlayers[msg.u].SET(msg.st);
+            }else if(msg.t===1){
+                controller(webPlayers[msg.u], msg.s, msg.k);
+            }
         };
 
 
-        /*
-        *   Engine
-        * */
+        const onMqttAuthSuccess = (userid) => {
+            this.setState({auth:{username:userid}});
+        };
 
-        const Engine = (action) => {
+        const onHostListUpdated = (msg) => {
+            this.setState({hosts:msg});
+        };
 
-            /*Start*/
-            if(action && !this.engine){
-                this.engine = setInterval(()=>{
-                    run();
-                }, 200 / FPS)
+        const onGameStarted = () => {
+            initBots();
+            initSyncLoop();
+            this.setState({game:true})
+        };
 
-            /*Stop*/
-            }else if(!action && this.engine){
-                clearTimeout(this.engine);
+
+        const initSyncLoop = () => {
+            setInterval(()=>{
+                player.GET(carState=>{
+                    this.socket.emit("msg",{
+                        u:this.state.auth.username,
+                        t:0,
+                        st:carState
+                    })
+                },250);
+            });
+        };
+
+
+        const initMQTT = () => {
+            this.socket = io.connect(mqttHost);
+            if(this.socket){
+                this.socket.on('msg', onMqttMsg);
+                this.socket.on('authSuccess', onMqttAuthSuccess);
+                this.socket.on('hostlistupdated', onHostListUpdated);
+                this.socket.on('gamestarted', onGameStarted);
             }
+        };
 
-            /*
-            *   Loop
-            * */
-
-            const run = () => {
-
+        const init = () => {
+            handler.subscribe(eventNames.KEYDOWN, keyDownHandler);
+            handler.subscribe(eventNames.KEYUP, keyUpHandler);
+            initMQTT();
+            this.state = {
+                auth:false,
+                hosts:[]
             }
+            // Engine(true);
         };
 
         init();
@@ -135,20 +191,77 @@ class PlayGround extends Component{
                 bots[id] = {};
             }
             bots[id][key] = method;
+        };
+
+
+        this.webSync = (key, method, id) => {
+            if(!(id in webPlayers)){
+                webPlayers[id] = {};
+            }
+            webPlayers[id][key] = method;
+        };
+
+
+        this.login = () => {
+            let username = this.refs.username.value;
+            if(username && username.length > 3){
+                if(this.socket){
+                    this.socket.emit("auth", {
+                        username:username,
+                        meta:{}
+                    });
+                }
+            }
+        };
+
+        this.startGame = () => {
+            if(this.socket){
+                this.socket.emit("startgame");
+            }
+        };
+
+        this.loadPlayers = () => {
+            return this.state.hosts.map((host, index) => {
+                if(host === this.state.auth.username){
+                    return <Car uid={host} key={index} sync={this.playerSync} getCars={this.getCars} reg={this.regCar} player={true}/>
+                }else{
+                    return <Car uid={host} key={index} sync={this.webSync} getCars={this.getCars}  reg={this.regCar}/>
+                }
+            });
         }
+
     }
 
     render(){
         return(
-            <div className="PlayGround" id="playground">
-                {
-                    this.loadMap()
-                }
-                <Car sync={this.playerSync} getCars={this.getCars} reg={this.regCar} player={true}/>
-                <Car sync={this.botSync} getCars={this.getCars}  reg={this.regCar} x={500} y={200} angle={180}/>
-                <Car sync={this.botSync} getCars={this.getCars}  reg={this.regCar} x={300} y={400} angle={180}/>
-                <Car sync={this.botSync} getCars={this.getCars}  reg={this.regCar} x={800} y={300} angle={180}/>
-            </div>
+            !this.state.auth && !this.state.game ? (
+                <div className="AuthScreen">
+                    <input ref="username" placeholder="Username"/>
+                    <div className="as-button" onClick={this.login}>Join</div>
+                </div>
+            ):(
+                <div>
+                    {!this.state.game ? (
+                        <div className="GameScreen">
+                            {
+                                this.state.hosts.map((host, index)=>{
+                                    return <div className="host" key={index}>{host}</div>
+                                })
+                            }
+                            {
+                                this.state.hosts.length > 1 ? (
+                                    <div className="as-button" onClick={this.startGame}>Start Game</div>
+                                ) : null
+                            }
+                        </div>
+                    ):(
+                        <div className="PlayGround" id="playground">
+                            {this.loadMap()}
+                            {this.loadPlayers()}
+                        </div>
+                    )}
+                </div>
+            )
         )
     }
 
