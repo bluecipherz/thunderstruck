@@ -492,7 +492,7 @@ class Car extends Component{
                     ) : null
                 }
                 <div className="carHealth" ref="health_bar">
-                    <div className="ch-name">{this.name}</div>
+                    <div className="ch-name">{this.id}</div>
                     <div className="ch-bar" ref="health"></div>
                 </div>
                 <div className="targetLocker" ref="targetLocker"></div>

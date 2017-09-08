@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c3ea3025-55de-4503-931a-3d60921c4f4a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.css" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.css.map" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.css.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.js" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.scss" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.scss" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,8 +31,8 @@
       <file leaf-file-name="Car.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="431" column="25" lean-forward="false" selection-start-line="431" selection-start-column="25" selection-end-line="431" selection-end-column="25" />
+            <state relative-caret-position="346">
+              <caret line="494" column="54" lean-forward="false" selection-start-line="494" selection-start-column="54" selection-end-line="494" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -340,7 +337,7 @@
       <updated>1504551715083</updated>
       <workItem from="1504551716672" duration="62527000" />
       <workItem from="1504870699042" duration="107000" />
-      <workItem from="1504883186141" duration="201000" />
+      <workItem from="1504883186141" duration="831000" />
     </task>
     <task id="LOCAL-00001" summary="Collision detection implemented">
       <created>1504634981662</created>
@@ -398,11 +395,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504869941428</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Websocket Synced">
+      <created>1504883394119</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1504883394119</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62835000" />
+    <option name="totallyTimeSpent" value="63465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="-4" width="1557" height="904" extended-state="6" />
@@ -751,8 +755,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="431" column="25" lean-forward="false" selection-start-line="431" selection-start-column="25" selection-end-line="431" selection-end-column="25" />
+        <state relative-caret-position="346">
+          <caret line="494" column="54" lean-forward="false" selection-start-line="494" selection-start-column="54" selection-end-line="494" selection-end-column="54" />
           <folding />
         </state>
       </provider>
