@@ -79,6 +79,11 @@ class Car extends Component{
             state = s;
         };
 
+        const setCrashInertia = (data) => {
+            crashInertia.speed = data.s;
+            crashInertia.angle = data.a;
+        };
+
         const init = () => {
             if(sync){
                 sync("LEFT", Left, this.id);
@@ -88,6 +93,7 @@ class Car extends Component{
                 sync("W", keyW, this.id);
                 sync("GET", getState, this.id);
                 sync("SET", setCarState, this.id);
+                sync("SET_CI", setCrashInertia, this.id);
             }
 
             if(props.reg){
@@ -235,7 +241,11 @@ class Car extends Component{
         const createCrashInertia = (s, angle) => {
             crashInertia = {
                 speed:s + (s/2),
-                angle:angle
+                angle:angle,
+                u:props.uid
+            };
+            if(this.props.onCollied){
+                this.props.onCollied(crashInertia);
             }
         };
 

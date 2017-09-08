@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3ea3025-55de-4503-931a-3d60921c4f4a" name="Default" comment="">
+    <list default="true" id="c3ea3025-55de-4503-931a-3d60921c4f4a" name="Default" comment="Websocket Synced">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/Car/Car.js" afterPath="$PROJECT_DIR$/src/GameScreen/Car/Car.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.css" afterPath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.css.map" afterPath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.css.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js" afterPath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.scss" afterPath="$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.scss" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,8 +22,8 @@
       <file leaf-file-name="PlayGround.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+            <state relative-caret-position="285">
+              <caret line="111" column="20" lean-forward="false" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
               <folding>
                 <element signature="e#50#89#0" expanded="true" />
               </folding>
@@ -38,8 +34,8 @@
       <file leaf-file-name="Car.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="89" column="28" lean-forward="false" selection-start-line="89" selection-start-column="28" selection-end-line="89" selection-end-column="28" />
+            <state relative-caret-position="435">
+              <caret line="244" column="27" lean-forward="true" selection-start-line="244" selection-start-column="27" selection-end-line="244" selection-end-column="27" />
               <folding>
                 <element signature="e#50#89#0" expanded="true" />
               </folding>
@@ -142,11 +138,12 @@
       <find>maxSpeed =</find>
       <find>maxSpeed</find>
       <find>createA</find>
-      <find>createCrashInertia</find>
       <find>crashInertia</find>
       <find>.con</find>
       <find>state</find>
       <find>sendEvent</find>
+      <find>COLLISION</find>
+      <find>createCrashInertia</find>
     </findStrings>
     <replaceStrings>
       <replace>car</replace>
@@ -508,7 +505,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1504551715083</updated>
-      <workItem from="1504551716672" duration="57531000" />
+      <workItem from="1504551716672" duration="59209000" />
     </task>
     <task id="LOCAL-00001" summary="Collision detection implemented">
       <created>1504634981662</created>
@@ -545,11 +542,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504681023370</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Websocket Synced">
+      <created>1504855459988</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1504855459988</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57531000" />
+    <option name="totallyTimeSpent" value="59209000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="42" y="-11" width="1559" height="912" extended-state="6" />
@@ -585,7 +589,8 @@
     <MESSAGE value="Auto targeting" />
     <MESSAGE value="Collision detections" />
     <MESSAGE value="Player modification" />
-    <option name="LAST_COMMIT_MESSAGE" value="Player modification" />
+    <MESSAGE value="Websocket Synced" />
+    <option name="LAST_COMMIT_MESSAGE" value="Websocket Synced" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -742,8 +747,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScreen/Car/Car.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="89" column="28" lean-forward="false" selection-start-line="89" selection-start-column="28" selection-end-line="89" selection-end-column="28" />
+        <state relative-caret-position="435">
+          <caret line="244" column="27" lean-forward="true" selection-start-line="244" selection-start-column="27" selection-end-line="244" selection-end-column="27" />
           <folding>
             <element signature="e#50#89#0" expanded="true" />
           </folding>
@@ -752,8 +757,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScreen/PlayGround/PlayGround.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+        <state relative-caret-position="285">
+          <caret line="111" column="20" lean-forward="false" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
           <folding>
             <element signature="e#50#89#0" expanded="true" />
           </folding>

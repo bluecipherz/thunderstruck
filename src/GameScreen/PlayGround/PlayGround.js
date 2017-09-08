@@ -11,8 +11,8 @@ import io from 'socket.io-client';
 const mqttHost = 'http://13.228.24.181:3400';
 const mqttEvents = {
     "STATE_UPDATE":0,
-    "KEY_EVENT":0,
-    "COLLISION":0,
+    "KEY_EVENT":1,
+    "COLLISION":2,
 };
 
 class PlayGround extends Component{
@@ -57,13 +57,11 @@ class PlayGround extends Component{
 
         const sendEvent = (car, state, keyCode) => {
             if(this.socket){
-                car.GET(carState=>{
-                    this.socket.emit("msg",{
-                        u:this.state.auth.username,
-                        s:state,
-                        k:keyCode,
-                        t:1,
-                    })
+                this.socket.emit("msg",{
+                    u:this.state.auth.username,
+                    s:state,
+                    k:keyCode,
+                    t:mqttEvents.KEY_EVENT,
                 })
             }
         };
@@ -105,10 +103,13 @@ class PlayGround extends Component{
 
 
         const onMqttMsg = (msg) => {
-            if(msg.t===0){
+            if(msg.t===mqttEvents.STATE_UPDATE){
                 webPlayers[msg.u].SET(msg.st);
-            }else if(msg.t===1){
+            }else if(msg.t===mqttEvents.KEY_EVENT){
                 controller(webPlayers[msg.u], msg.s, msg.k);
+            }else if(msg.t===mqttEvents.COLLISION){
+                if(webPlayers[msg.u])
+                    webPlayers[msg.u].SET_CI(msg);
             }
         };
 
@@ -133,7 +134,7 @@ class PlayGround extends Component{
                 player.GET(carState=>{
                     this.socket.emit("msg",{
                         u:this.state.auth.username,
-                        t:0,
+                        t:mqttEvents.STATE_UPDATE,
                         st:carState
                     })
                 },250);
@@ -220,12 +221,21 @@ class PlayGround extends Component{
             }
         };
 
+        this.onCollied = (crashInertia) => {
+            this.socket.emit("msg",{
+                t:mqttEvents.COLLISION,
+                s:crashInertia.speed,
+                a:crashInertia.angle,
+                u:crashInertia.u
+            })
+        };
+
         this.loadPlayers = () => {
             return this.state.hosts.map((host, index) => {
                 if(host === this.state.auth.username){
-                    return <Car uid={host} key={index} sync={this.playerSync} getCars={this.getCars} reg={this.regCar} player={true}/>
+                    return <Car uid={host} key={index} sync={this.playerSync} getCars={this.getCars} reg={this.regCar} onCollied={this.onCollied} player={true}/>
                 }else{
-                    return <Car uid={host} key={index} sync={this.webSync} getCars={this.getCars}  reg={this.regCar}/>
+                    return <Car uid={host} key={index} sync={this.webSync} getCars={this.getCars}  onCollied={this.onCollied}  reg={this.regCar}/>
                 }
             });
         }
